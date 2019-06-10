@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
@@ -17,7 +18,7 @@ if(process.env.NODE_ENV === 'production') {
   app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html')))
 }
 
-const db = require('./config/keys').mongoURI
+const db = process.env.MONGO_URI
 
 mongoose.connect(db, { useNewUrlParser: true })
   .then(() => console.log('MongoDB connected...'))
